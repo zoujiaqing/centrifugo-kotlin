@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/**/build/
+!**/src/**/gradle/
+
+# Kotlin
+*.class
+*.jar
+*.log
+*.war
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config
+local.properties
+
+# Build outputs
+/out/
+/target/
+
+# JS
+kotlin-js-store/
+yarn.lock
+node_modules/
