@@ -1,6 +1,6 @@
 # centrifugo-kotlin
 
-Kotlin Multiplatform client SDK for [Centrifugo](https://centrifugal.dev/) real-time messaging.
+Kotlin Multiplatform client SDK for [Centrifugo](https://centrifugal.dev/) and [Centrifuge](https://github.com/centrifugal/centrifuge) real-time messaging.
 
 [中文文档](README.zh-CN.md)
 
@@ -15,6 +15,69 @@ Kotlin Multiplatform client SDK for [Centrifugo](https://centrifugal.dev/) real-
 - **Type-safe** - Sealed classes for protocol commands/replies, kotlinx.serialization
 - **Publication Tags Filter** - Server-side message filtering by tags using FilterNode expressions
 - **Multiple Transport Support** - WebSocket, HTTP Streaming, and SSE with automatic fallback
+- **Centrifugo Protocol Support** - v6, v5, v4 (bidirectional protocol)
+
+> **Note**: This SDK supports both **Centrifugo** (standalone server) and **Centrifuge** (Go library for building custom servers). Both use the same client protocol, so the SDK works with either.
+
+## Protocol Version Support
+
+| Feature | v6 | v5 | v4 |
+|---------|----|----|-----|
+| WebSocket Transport | ✅ | ✅ | ✅ |
+| HTTP Streaming | ✅ | ✅ | ✅ |
+| SSE Transport | ✅ | ✅ | ✅ |
+| Automatic Transport Fallback | ✅ | ✅ | ❌ |
+| Publication Tags Filter | ✅ | ✅ | ❌ |
+| Delta Compression | ✅ | ✅ | ✅ |
+| Connection Batching | ✅ | ✅ | ❌ |
+| Server-side Subscriptions | ✅ | ✅ | ✅ |
+
+## API Comparison
+
+Below is a comparison of client SDK features across different Centrifugo official SDKs:
+
+| Feature | Official API | centrifugo-kotlin | Java | Swift | JS | Go |
+|---------|-------------|-------------------|------|-------|----|----|
+| **Connection** |
+| connect/disconnect | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| setToken/setData/setHeaders | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| automatic reconnect | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| client state changes | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| command-reply | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| command timeouts | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| async pushes | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ping-pong | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| token refresh | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| handle disconnect | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| server-side subs | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| batching API | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
+| headers (emulation) | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
+| **Subscription** |
+| subscribe/unsubscribe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| subscription options | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| auto resubscribe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| subscription states | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| subscription token refresh | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| handle unsubscribe advice | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| subscription registry | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| delta compression | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| publication tags filter | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
+| **Messaging** |
+| publish (channel) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| rpc | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| send | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| history | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| presence | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| presenceStats | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Transports** |
+| WebSocket | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| HTTP Stream | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| SSE | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Auto fallback | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+> ✅ = Supported | ❌ = Not supported |空白 = Not applicable
+
+For detailed API documentation, see [docs/api.md](docs/api.md).
 
 ## Tech Stack
 
